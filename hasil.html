@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Kuis</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<main>
+    <div class="container-result result-container">
+        <h1>Hasil Kuis Anda</h1>
+
+        <div class="result-card">
+            <div class="result-score">
+                <div class="circle-progress" id="circle-progress">
+                    <span id="percentage-text">0%</span>
+                </div>
+            </div>
+
+            <div class="result-details">
+                <div class="detail correct">
+                    <span>Benar</span>
+                    <span id="score-correct">0</span>
+                </div>
+                <div class="detail wrong">
+                    <span>Salah</span>
+                    <span id="score-wrong">0</span>
+                </div>
+                <div class="detail total">
+                    <span>Total Pertanyaan</span>
+                    <span id="score-total">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-actions">
+            <a href="kategori.html" class="btn-retry">Coba Lagi</a>
+            <a href="home.html" class="btn-home">Kembali ke Home</a>
+        </div>
+    </div>
+</main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+<script>
+    const scoreRaw = sessionStorage.getItem('quizScore');
+    const totalRaw = sessionStorage.getItem('quizTotal');
+
+    // Kalau tidak ada data hasil kuis (halaman diakses langsung), kembali ke home
+    if (scoreRaw === null || totalRaw === null) {
+        window.location.href = 'home.html';
+    } else {
+        const score = parseInt(scoreRaw, 10);
+        const total = parseInt(totalRaw, 10);
+        const wrong = total - score;
+        const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
+
+        document.getElementById('score-correct').textContent = score;
+        document.getElementById('score-wrong').textContent = wrong;
+        document.getElementById('score-total').textContent = total;
+        document.getElementById('percentage-text').textContent = percentage + '%';
+        document.getElementById('circle-progress').style.setProperty('--percentage', percentage + '%');
+
+        // Hapus data hasil supaya tidak dipakai ulang, setara unset($_SESSION[...]) di PHP
+        sessionStorage.removeItem('quizScore');
+        sessionStorage.removeItem('quizTotal');
+    }
+</script>
+</html>

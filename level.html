@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Level</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <a href="home.html" class="logo"><span>Quiz</span>Time.</a>
+    <div class="content">
+        <nav class="navbar">
+            <a href="home.html">Beranda</a>
+            <a href="rule.html">Cara Bermain</a>
+            <a href="about.html">Tentang Kami</a>
+        </nav>
+    </div>
+    <div id="menu-btn" class="fas fa-bars"></div>
+</header>
+<main>
+    <div class="container-level">
+        <div class="back">
+            <a href="kategori.html" class="back-button"><i class="fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+        <h1 id="level-title">Pilih Level Kesulitan</h1>
+        <div class="levels" id="levels-container">
+            <!-- Kartu level dirender oleh JavaScript -->
+        </div>
+    </div>
+</main>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+<script src="assets/js/data-categories.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const kategori = params.get('kategori');
+
+    // Kategori wajib ada dan valid, kalau tidak kembali ke halaman kategori
+    if (!kategori || !quizCategories[kategori]) {
+        window.location.href = 'kategori.html';
+    } else {
+        document.getElementById('level-title').textContent =
+            'Pilih Level Kesulitan - ' + quizCategories[kategori];
+
+        const levels = ['mudah', 'normal', 'sulit'];
+        const container = document.getElementById('levels-container');
+
+        levels.forEach(level => {
+            const link = document.createElement('a');
+            link.href = 'kuis.html?kategori=' + encodeURIComponent(kategori) + '&level=' + encodeURIComponent(level);
+            link.className = 'level-card';
+            const h3 = document.createElement('h3');
+            h3.textContent = level.charAt(0).toUpperCase() + level.slice(1);
+            link.appendChild(h3);
+            container.appendChild(link);
+        });
+    }
+</script>
+</html>

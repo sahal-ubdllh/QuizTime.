@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Kuis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=1.0">
+</head>
+<body>
+
+<main>
+    <div class="container-quiz quiz-container">
+        <div class="back">
+            <a href="home.html" class="back-button"><i class="fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+        <div class="quiz-header">
+            <div class="quiz-info">
+                <span class="category" id="info-category">Kategori: -</span>
+                <span class="level" id="info-level">Level: -</span>
+            </div>
+            <div class="quiz-timer">
+                <span id="timer">10</span> detik
+            </div>
+            <div class="quiz-progress">
+                Pertanyaan <span id="current-question">1</span>/<span id="total-questions">0</span>
+            </div>
+        </div>
+
+        <div class="quiz-body">
+            <div id="question" class="question"></div>
+            <div id="options" class="options"></div>
+        </div>
+        <audio id="sound-correct" src="assets/audio/correct.mp3" preload="auto"></audio>
+        <audio id="sound-wrong" src="assets/audio/wrong.mp3" preload="auto"></audio>
+
+        <div class="quiz-footer">
+            <button id="next-btn" class="btn-next" disabled>Next</button>
+        </div>
+    </div>
+</main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="assets/js/data-categories.js"></script>
+<script src="assets/js/data-questions.js"></script>
+<script src="assets/js/quiz.js"></script>
+</html>
